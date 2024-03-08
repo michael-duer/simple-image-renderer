@@ -1,5 +1,5 @@
 import "./App.css";
-import ImageRenderer from "./Components/BasicImageRenderer";
+import ImageRenderer from "./components/ImageRenderer";
 
 function App() {
   return (

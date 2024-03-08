@@ -14,7 +14,7 @@ import vtkConeSource from "@kitware/vtk.js/Filters/Sources/ConeSource";
 import vtkActor from "@kitware/vtk.js/Rendering/Core/Actor";
 import vtkMapper from "@kitware/vtk.js/Rendering/Core/Mapper";
 
-class BasicImageRenderer extends Component {
+class ImageRenderer extends Component {
   constructor(props) {
     super(props);
     // Initializing reference for the container and a context object to manage VTK state.
@@ -51,37 +51,6 @@ class BasicImageRenderer extends Component {
       interactor.setView(openGLRenderWindow);
       interactor.initialize();
       interactor.setContainer(this.vtkContainerRef.current);
-
-      // Mock data setup for demonstration (e.g., a simple 2x2 checkerboard pattern).
-      const dimension = 2;
-      const imageData = vtkImageData.newInstance();
-      imageData.setDimensions([dimension, dimension, 1]);
-      imageData.setSpacing(1.0, 1.0, 1.0);
-
-      // Creating a 2x2 checkerboard pattern as a simple demonstration.
-      const scalars = new Uint8Array([0, 255, 255, 0]);
-      const dataArray = vtkDataArray.newInstance({
-        name: "scalars",
-        values: scalars,
-        numberOfComponents: 1, // only grey scale values
-      });
-      imageData.getPointData().setScalars(dataArray);
-
-      // TODO:Fix issue so the chess board gets rendered
-      /** Possible sources of the issue
-       * - variable imageData not correct
-       * - mapper fails
-       * - actor fails
-       */
-
-      // Initialize and set the mapper and actor
-      /*
-      const mapper = vtkImageMapper.newInstance();
-      mapper.setInputData(imageData);
-
-      const actor = vtkImageSlice.newInstance();
-      actor.setMapper(mapper);
-*/
 
       // Example setup for rendering a cone instead of the image data
       const coneSource = vtkConeSource.newInstance({ height: 1.0 });
@@ -130,4 +99,4 @@ class BasicImageRenderer extends Component {
   }
 }
 
-export default BasicImageRenderer;
+export default ImageRenderer;
